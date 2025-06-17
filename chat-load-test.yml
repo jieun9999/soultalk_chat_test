@@ -1,0 +1,25 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 20
+      arrivalRate: 20
+      name: "Warm up"
+    - duration: 10
+      arrivalRate: 60
+      name: "High loads"
+  engines:
+    socketio: {}
+
+scenarios:
+  - name: "1:1 Chat Load Test"
+    engine: socketio
+    flow:
+      - emit:
+          channel: "register"
+      - loop:
+          - emit:
+              channel: "send_message"
+              data:
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        count: 10
+
