@@ -1,5 +1,7 @@
 config:
-  target: 'http://localhost:3000'
+# Artillery는 target 값을 URL로 해석하기 때문에 URL 형식을 지켜야 합니다
+# Socket.IO 클라이언트가 서버에 연결할 때 HTTP/HTTPS 프로토콜을 통해 초기 핸드셰이크를 수행하기 때문입니다.
+  target: 'http://3.35.230.97:3000'
   phases:
     - duration: 20
       arrivalRate: 20
