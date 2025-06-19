@@ -3,12 +3,34 @@ config:
 # Socket.IO 클라이언트가 서버에 연결할 때 HTTP/HTTPS 프로토콜을 통해 초기 핸드셰이크를 수행하기 때문입니다.
   target: 'http://3.35.230.97:3000'
   phases:
-    - duration: 20
-      arrivalRate: 20
-      name: "Warm up"
-    - duration: 10
-      arrivalRate: 60
-      name: "High loads"
+# 1단계: 워밍업 및 초기 부하 (0-500명)
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 500
+      name: "Warm up and initial load"
+    
+    # 2단계: 중간 부하 증가 (500-1,500명)
+    - duration: 180
+      arrivalRate: 500
+      rampTo: 1500
+      name: "Medium load increase"
+    
+    # 3단계: 고부하 증가 (1,500-5,000명)
+    - duration: 240
+      arrivalRate: 1500
+      rampTo: 5000
+      name: "High load increase"
+    
+    # 4단계: 최대 부하 유지 (5,000명)
+    - duration: 300
+      arrivalRate: 5000
+      name: "Maximum load stability"
+    
+    # 5단계: 정리 단계 (5,000-100명)
+    - duration: 180
+      arrivalRate: 5000
+      rampTo: 100
+      name: "Cool down phase"
   engines:
     socketio: {}
 
