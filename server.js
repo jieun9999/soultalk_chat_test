@@ -14,6 +14,7 @@ io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
 
 // 사용자 등록 이벤트 처리
+// 서버는 해당 이벤트 이름에 대한 리스너(on)로 데이터를 수신
 socket.on("register", () => {
   users[socket.id] = socket.id; // socket.id를 매핑
   console.log(`Socket ID: ${socket.id}`);
