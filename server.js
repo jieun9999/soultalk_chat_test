@@ -44,5 +44,5 @@ socket.on("send_message", (data) => {
 // 서버 실행
 const PORT = process.env.PORT || 3000; // 환경변수 PORT 사용, 기본값 3000
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://3.35.230.97:${PORT}`);
 });
